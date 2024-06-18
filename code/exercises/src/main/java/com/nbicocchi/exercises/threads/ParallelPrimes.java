@@ -3,6 +3,7 @@ package com.nbicocchi.exercises.threads;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.stream.IntStream;
 
 public class ParallelPrimes {
     public static class PrimeEngine implements Callable<List<Integer>> {
@@ -15,15 +16,11 @@ public class ParallelPrimes {
         }
 
         public boolean isPrime(int number) {
-            if (number <= 1) {
-                return false;
+            if (number <= 1 || number % 2 == 0 || number % 3 == 0 || number % 5 == 0) {
+                return number == 2 || number == 3 || number == 5;
             }
-            for (int i = 2; i < number; i++) {
-                if (number % i == 0) {
-                    return false;
-                }
-            }
-            return true;
+            return IntStream.iterate(6, i -> i <= Math.sqrt(number), i -> i + 6)
+                    .noneMatch(i -> number % (i + 1) == 0 || number % (i - 1) == 0);
         }
 
         public List<Integer> call() {

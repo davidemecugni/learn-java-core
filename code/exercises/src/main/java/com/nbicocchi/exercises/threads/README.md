@@ -2,7 +2,9 @@
 
 ## Java Exercises (Threads)
 
-**[StartStop.java]** Write a program in which the main thread starts two child threads, waits 100 ms, and gracefully terminates both of them. Each child thread, during its lifespan, prints the following messages where *T1* is its name and the milliseconds represent the time elapsed since the thread first started.
+**[StartStop.java]** Write a program in which the main thread starts two child threads, waits 100 ms, and gracefully
+terminates both of them. Each child thread, during its lifespan, prints the following messages where *T1* is its name
+and the milliseconds represent the time elapsed since the thread first started.
 
 ```text
 T1 started
@@ -16,9 +18,15 @@ T1 running since 100 ms
 T1 terminated
 ```
 
-**[DayChangeCheck.java]** Write a program in which the main thread starts a child thread which, every 15 minutes, checks if the day of the month has changed and eventually prints a message (see Thread.sleep(), java.time.LocalDate). The main thread do not wait, but terminates immediately after starting the child thread (bad practice! the main thread should always wait for its children).
+**[DayChangeCheck.java]** Write a program in which the main thread starts a child thread which, every 15 minutes, checks
+if the day of the month has changed and eventually prints a message (see Thread.sleep(), java.time.LocalDate). The main
+thread do not wait, but terminates immediately after starting the child thread (bad practice! the main thread should
+always wait for its children).
 
-**[ThreadPool.java]** Write a program using a Thread[] (an array of Thread objects) for running a fixed number of tasks using the same number of parallel threads. Each thread, prints a message when it starts, sleeps for a random time (< 1 sec) and print another message when it terminates showing the total amount of time it run. For example, with 8 tasks (implying 8 threads), an output similar to the one shown below is expected.
+**[ThreadPool.java]** Write a program using a Thread[] (an array of Thread objects) for running a fixed number of tasks
+using the same number of parallel threads. Each thread, prints a message when it starts, sleeps for a random time (< 1
+sec) and print another message when it terminates showing the total amount of time it run. For example, with 8 tasks (
+implying 8 threads), an output similar to the one shown below is expected.
 
 ```text
 START thread=Thread-0 task=0
@@ -39,7 +47,11 @@ STOP thread=Thread-7 task=7 t=483 ms
 STOP thread=Thread-1 task=1 t=522 ms
 ```
 
-**[ThreadPoolExecutor.java]** The exercise proposed in ThreadPool.java suffers a relevant issue. In case of a high number (>> number of physical cores) of tasks, a high number of parallel threads is launched. This practice is not always optimal. Write an alternative version of ThreadPool.java making use of an ExecutorService (see java.util.concurrent.ExecutorService) limiting the number of concurrent threads to a specified amount. For example, with 8 tasks and 4 parallel threads, an output similar to the one shown below is expected.
+**[ThreadPoolExecutor.java]** The exercise proposed in ThreadPool.java suffers a relevant issue. In case of a high
+number (>> number of physical cores) of tasks, a high number of parallel threads is launched. This practice is not
+always optimal. Write an alternative version of ThreadPool.java making use of an ExecutorService (see
+java.util.concurrent.ExecutorService) limiting the number of concurrent threads to a specified amount. For example, with
+8 tasks and 4 parallel threads, an output similar to the one shown below is expected.
 
 ```text
 START thread=pool-1-thread-3 task=2
@@ -60,7 +72,8 @@ STOP thread=pool-1-thread-4 task=6 t=455 ms
 STOP thread=pool-1-thread-1 task=7 t=566 ms
 ```
 
-**[ScheduledExecution.java]** Write a program printing, every second, the time of day followed by "Hello!" as shown below (see java.time.LocalTime, java.util.concurrent.ScheduledExecutorService).
+**[ScheduledExecution.java]** Write a program printing, every second, the time of day followed by "Hello!" as shown
+below (see java.time.LocalTime, java.util.concurrent.ScheduledExecutorService).
 
 ```text
 21:03:28.221207: Hello!
@@ -70,24 +83,39 @@ STOP thread=pool-1-thread-1 task=7 t=566 ms
 21:03:32.198206: Hello!
 ```
 
-**[ProducerConsumerSafe.java]** Write a program implementing two threads interacting via a producer-consumer communication scheme. The main thread, creates both producer and consumer, waits 100 ms, and gracefully terminates them (see Thread.interrupt() method). More specifically, the producer pushes integer objects on a shared queue, while the consumer fetches them. The consumer, before terminating, prints the total number of integers fetched from the queue (as represented below). **Both producer and consumer must be manually synchronized** on the shared queue before using it.
+**[ProducerConsumerSafe.java]** Write a program implementing two threads interacting via a producer-consumer
+communication scheme. The main thread, creates both producer and consumer, waits 100 ms, and gracefully terminates
+them (see Thread.interrupt() method). More specifically, the producer pushes integer objects on a shared queue, while
+the consumer fetches them. The consumer, before terminating, prints the total number of integers fetched from the
+queue (as represented below). **Both producer and consumer must be manually synchronized** on the shared queue before
+using it.
 
 ```text
 Total number of consumed elements: 90065
 ```
 
-**[ProducerConsumerUnsafe.java]** Write a program implementing two threads interacting via a producer-consumer communication scheme. The main thread, creates both producer and consumer, waits 100 ms, and gracefully terminates them (see Thread.interrupt() method). More specifically, the producer pushes integer objects on a shared queue, while the consumer fetches them. The consumer, before terminating, prints the total number of integers fetched from the queue (as represented below). **Both producer and consumer should not be synchronized on the shared queue but, instead, have to use a thread-safe collection**.
+**[ProducerConsumerUnsafe.java]** Write a program implementing two threads interacting via a producer-consumer
+communication scheme. The main thread, creates both producer and consumer, waits 100 ms, and gracefully terminates
+them (see Thread.interrupt() method). More specifically, the producer pushes integer objects on a shared queue, while
+the consumer fetches them. The consumer, before terminating, prints the total number of integers fetched from the
+queue (as represented below). **Both producer and consumer should not be synchronized on the shared queue but, instead,
+have to use a thread-safe collection**.
 
 ```text
 Total number of consumed elements: 90065
 ```
 
-**[ParallelPrimes.java]** The following class implements the `Callable<V>` interface which is frequently used to collect the return values of methods running on separate threads. Using the code provided, write a program searching prime numbers on a fixed number of parallel threads (see java.util.concurrent.ExecutorService). Each thread, receiving a range to be searched e.g. [0, 1000], [1000, 2000]..., returns a List<Integer> containing the prime numbers found. The main thread starts the parallel child threads using ExecutorService.invokeAll() and receives a `List<Future<List<Integer>>>` for fetching the results (see `java.util.concurrent.Future<V>`). 
+**[ParallelPrimes.java]** The following class implements the `Callable<V>` interface which is frequently used to collect
+the return values of methods running on separate threads. Using the code provided, write a program searching prime
+numbers on a fixed number of parallel threads (see java.util.concurrent.ExecutorService). Each thread, receiving a range
+to be searched e.g. [0, 1000], [1000, 2000]..., returns a List<Integer> containing the prime numbers found. The main
+thread starts the parallel child threads using ExecutorService.invokeAll() and receives a `List<Future<List<Integer>>>`
+for fetching the results (see `java.util.concurrent.Future<V>`).
 
 ```java
 public static class PrimeEngine implements Callable<List<Integer>> {
-    int start;
-    int end;
+    final int start;
+    final int end;
 
     public PrimeEngine(int start, int end) {
         this.start = start;
@@ -95,18 +123,13 @@ public static class PrimeEngine implements Callable<List<Integer>> {
     }
 
     public boolean isPrime(int number) {
-        if (number <= 1) {
-            return false;
+        if (number <= 1 || number % 2 == 0 || number % 3 == 0 || number % 5 == 0) {
+            return number == 2 || number == 3 || number == 5;
         }
-        for (int i = 2; i < number; i++) {
-            if (number % i == 0) {
-                return false;
-            }
-        }
-        return true;
+        return IntStream.iterate(6, i -> i <= Math.sqrt(number), i -> i + 6)
+                .noneMatch(i -> number % (i + 1) == 0 || number % (i - 1) == 0);
     }
 
-    @Override
     public List<Integer> call() {
         List<Integer> result = new ArrayList<>();
         for (int i = start; i < end; i++) {
